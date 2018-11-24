@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithms,Algorithms Part II,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SeriesKd-Trees Kd-Trees Key is 2d(point in a plane). Space-partitioning trees: use in games.  2d tree construction  Data Structure: BST, but key is x and y coordinate When construction, first divide b">
+<meta name="keywords" content="algorithms,Algorithms Part II">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kd-Trees">
+<meta property="og:url" content="http://cosmos218.github.io/2018/11/23/Kd-Trees/index.html">
+<meta property="og:site_name" content="Tim Zeng">
+<meta property="og:description" content="SeriesKd-Trees Kd-Trees Key is 2d(point in a plane). Space-partitioning trees: use in games.  2d tree construction  Data Structure: BST, but key is x and y coordinate When construction, first divide b">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://cosmos218.github.io/images/Image.png">
+<meta property="og:image" content="http://cosmos218.github.io/images/kdtreedemo1.gif">
+<meta property="og:image" content="http://cosmos218.github.io/images/kdtreedemo2.gif">
+<meta property="og:updated_time" content="2018-11-24T06:30:55.529Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kd-Trees">
+<meta name="twitter:description" content="SeriesKd-Trees Kd-Trees Key is 2d(point in a plane). Space-partitioning trees: use in games.  2d tree construction  Data Structure: BST, but key is x and y coordinate When construction, first divide b">
+<meta name="twitter:image" content="http://cosmos218.github.io/images/Image.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cosmos218.github.io/2018/11/23/Kd-Trees/">
+
+
+
+
+
+  <title>Kd-Trees | Tim Zeng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tim Zeng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My personal blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cosmos218.github.io/2018/11/23/Kd-Trees/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tim Zeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim Zeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kd-Trees</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-23T23:46:43-06:00">
+                2018-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCourses/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCourses</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h1><p><a href="http://cosmos218.github.io/2018/11/23/Kd-Trees/">Kd-Trees</a></p>
+<h1 id="Kd-Trees"><a href="#Kd-Trees" class="headerlink" title="Kd-Trees"></a>Kd-Trees</h1><ul>
+<li>Key is 2d(point in a plane).</li>
+<li>Space-partitioning trees: use in games.</li>
+</ul>
+<h1 id="2d-tree-construction"><a href="#2d-tree-construction" class="headerlink" title="2d tree construction"></a>2d tree construction</h1><p><img src="/images/Image.png" alt="a"></p>
+<ul>
+<li>Data Structure: BST, but key is x and y coordinate</li>
+<li>When construction, first divide by horizontal, then vertical, then horizontal, then vertical…. it’s like a binary search in 2d space!</li>
+<li>At this time, we shall realize that BST’s searching is just kind of binary search, but its constrution is more flexible and smart than array and linked list!</li>
+</ul>
+<h1 id="Nearest-neighbor-search-in-a-2d-tree-demo"><a href="#Nearest-neighbor-search-in-a-2d-tree-demo" class="headerlink" title="Nearest neighbor search in a 2d tree demo"></a>Nearest neighbor search in a 2d tree demo</h1><p>Search through a 2d tree to find the nearest neighbor, when the current min record is less than the distance between query and rect of the node, stop searching that branch.</p>
+<h1 id="Kd-Trees-assignment"><a href="#Kd-Trees-assignment" class="headerlink" title="Kd-Trees assignment"></a>Kd-Trees assignment</h1><p><a href="http://coursera.cs.princeton.edu/algs4/assignments/kdtree.html" target="_blank" rel="noopener">Specification</a><br>Some tricky points:</p>
+<ol>
+<li>When writing nearest how to implement without using global variables? That is, how to do recursive and pass mutable Double arguments?</li>
+<li>Do not compute the distance between the query point and the point in a node if the closest point discovered so far is closer than the distance between the query point and the rectangle corresponding to the node.</li>
+</ol>
+<h2 id="Method-implemention-algorithm"><a href="#Method-implemention-algorithm" class="headerlink" title="Method implemention algorithm"></a>Method implemention algorithm</h2><ul>
+<li>size(): simply do size++ when insert()</li>
+<li>insert(): use helper method like put() in BST, recursively find the best place to insert Node; to compute rectangle, need to pass parent node when recurse</li>
+<li>contains(): similar to get() in BST</li>
+<li>range(): use helper function to recursively search. Several different conditions: rect contains x.p, rect cross the line of x, rect on the lb of line, rect on the rt of the line.</li>
+<li>nearest(): have to deal with the problem that no need to compute when current min is less than query to rect of the node</li>
+</ul>
+<p>Main gain in knowledge: be familiar with tree searching and adding recursive operation, have a try of the 2d geometry operation</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p><img src="/images/kdtreedemo1.gif" alt="demo1"></p>
+<center>Nearest neighbor to mouse</center><br><img src="/images/kdtreedemo2.gif" alt="demo2"><br><center>Range detection</center>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithms/" rel="tag"># algorithms</a>
+          
+            <a href="/tags/Algorithms-Part-II/" rel="tag"># Algorithms Part II</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/23/BombLab/" rel="next" title="BombLab">
+                <i class="fa fa-chevron-left"></i> BombLab
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/timg.jpg" alt="Tim Zeng">
+            
+              <p class="site-author-name" itemprop="name">Tim Zeng</p>
+              <p class="site-description motion-element" itemprop="description">Cosmos218</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cosmos218" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xzeng@cs.wisc.edu" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Series"><span class="nav-number">1.</span> <span class="nav-text">Series</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kd-Trees"><span class="nav-number">2.</span> <span class="nav-text">Kd-Trees</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2d-tree-construction"><span class="nav-number">3.</span> <span class="nav-text">2d tree construction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nearest-neighbor-search-in-a-2d-tree-demo"><span class="nav-number">4.</span> <span class="nav-text">Nearest neighbor search in a 2d tree demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kd-Trees-assignment"><span class="nav-number">5.</span> <span class="nav-text">Kd-Trees assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-implemention-algorithm"><span class="nav-number">5.1.</span> <span class="nav-text">Method implemention algorithm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">6.</span> <span class="nav-text">Demo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tim Zeng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
