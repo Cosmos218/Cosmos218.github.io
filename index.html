@@ -262,6 +262,402 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cosmos218.github.io/2018/11/26/HashTables/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tim Zeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim Zeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/HashTables/" itemprop="url">HashTable</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-26T00:40:06-06:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCourses/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCourses</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="DataIndexedWordSet-Implementation"><a href="#DataIndexedWordSet-Implementation" class="headerlink" title="DataIndexedWordSet Implementation"></a>DataIndexedWordSet Implementation</h1><h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h2><p>Use 32 bits to store word:<br>cat = 3124 = 3&times;32<sup>2</sup> +1&times;32<sup>1</sup>+20&times;32<sup>0</sup></p>
+<p>But what if long words(ambiguity)?</p>
+<p>We call this <strong>collisiono handling</strong>.</p>
+<p>How do we convert arbitary data to index?</p>
+<p>We call this <strong>computing a hashcode</strong>.</p>
+<h2 id="Improved"><a href="#Improved" class="headerlink" title="Improved"></a>Improved</h2><p><strong>External chaining</strong><br><img src="/images/list.png" alt="list"><br>More improved: mod the index so less memory needed.<br><img src="/images/list2.png" alt="list2"></p>
+<p>There’s a tradeoff: N = items, M = buckets. Time = N/M = L</p>
+<p>Solution: wheneveer L=N/M exceeds some number, increase M by resizing.</p>
+<p>Notice: item may be put in different bucket when resizing.</p>
+<p>Notice: in java -1 % 4 = -1, so use Math.floormod()</p>
+<h1 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h1><p><img src="/images/list3.png" alt="list3"></p>
+<p>When implementing resizing, contains and insert will cost o(1) time.</p>
+<p>hashcode() is most important since good one can divide items equally into buckets.</p>
+<p>But more significant bits are still ignored.</p>
+<p>Solution: <img src="/images/list4.png" alt="list4"><br>Default hashCode(): return this(i.e address of object)<br><img src="/images/list5.png" alt="list5"><br><img src="/images/list6.png" alt="list6"></p>
+<h1 id="Linear-probing"><a href="#Linear-probing" class="headerlink" title="Linear probing"></a>Linear probing</h1><ul>
+<li>Hash. Map key to integer i between 0 nad M-1</li>
+<li>Insert. Put at table index i if free; if not try i+1, i+2 etc.</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cosmos218.github.io/2018/11/25/The late homecomer/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tim Zeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tim Zeng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/The late homecomer/" itemprop="url">The Late Homecomer</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-25T12:52:06-06:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/UW-Madison/" itemprop="url" rel="index">
+                    <span itemprop="name">UW-Madison</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote class="blockquote-center">better late than never</blockquote>
+
+<h1 id="Prelogue-Seeking-Refuge"><a href="#Prelogue-Seeking-Refuge" class="headerlink" title="Prelogue: Seeking Refuge"></a>Prelogue: Seeking Refuge</h1><p>Three places Yang fled after Viet War:</p>
+<ul>
+<li><p>Ban Vinai Refugee Camp, Loei Province, Thailand: December 1980–January 1987 —-<em>This is where she borned</em></p>
+</li>
+<li><p>Phanat Nikhom Transition Camp to America, Chonburi Province, Thailand: January 1987–July 1987</p>
+</li>
+<li><p>St. Paul, Minnesota, the United States of America: July 1987–Today</p>
+</li>
+</ul>
+<p>Some notes:</p>
+<ul>
+<li><p>Hmong that was only skin deep.</p>
+</li>
+<li><p>Hmong is an ethnic minority. We don’t have a country. We are here looking for a home.</p>
+</li>
+<li><p>The young woman slowly unleashed the flood of Hmong into language, seeking refuge not for a name or a gender, but a people.</p>
+</li>
+</ul>
+<h1 id="Chapter-1-A-walk-in-the-jungle"><a href="#Chapter-1-A-walk-in-the-jungle" class="headerlink" title="Chapter 1: A walk in the jungle"></a>Chapter 1: A walk in the jungle</h1><ul>
+<li><p>Communist took over Laos, declared a death warrant against the Hmong who helped Americans. Americans left, leaving Hmong under death and violence. Most of them, including author’s mother and father, ran into Laotian jungles.</p>
+</li>
+<li><p>Yang’s mother and father both lived a hard life in jungle.</p>
+</li>
+<li><p>“The mountains were their home and they knew them well. When Edward Landsdale, an agent for the CIA, advised the use of the Hmong in Laos against the North Vietnamese and Pathet Lao soldiers, he could not have known what history would do to them. The Americans entered the country and recruited Hmong to serve, first as guides and then later as fighters, without thought to the price their recruits would pay with their lives and the lives of their children for generations to come. The old ones who survived would carry shrapnel in their bodies, broken lives in their souls. For the young, for people like my mother and father, seeing bodies on the jungle floor, pieces of cloth wilting in the humid heat, was a horrible sight but a fact of being alive.”</p>
+</li>
+<li><p>Then the author talked about the process of marriage between her parents. Everyone thought they married at a wrong time because “the future stretched only in days”.</p>
+</li>
+<li><p>After marriage and because of the soldiers, Yangs’ mother never saw her family again.</p>
+</li>
+</ul>
+<h1 id="Chapter-2-Enemy-Camp"><a href="#Chapter-2-Enemy-Camp" class="headerlink" title="Chapter 2: Enemy Camp"></a>Chapter 2: Enemy Camp</h1><ul>
+<li><p>Soldiers attacked the group, women and children surrendered, men continued fleeding into jungle. Women and children lived hardly in captive camps, many children died. </p>
+</li>
+<li><p>Grandma showed fortitude.</p>
+</li>
+<li><p>Viet soldiers played movie showing men had left women.</p>
+</li>
+<li><p>Grandma showed endearment when mother’s child pain grew.</p>
+</li>
+<li><p>Mother was told father was died.</p>
+</li>
+<li><p>Men saved women out.</p>
+</li>
+<li><p>Then they decided to go to Thailand, but the journey was tough.</p>
+</li>
+<li><p>It took them 10 days to get to the Mekong River.</p>
+</li>
+<li><p>Grandma chose to die with father(no raft)</p>
+</li>
+</ul>
+<h1 id="Chapter-3-Refugees"><a href="#Chapter-3-Refugees" class="headerlink" title="Chapter 3: Refugees"></a>Chapter 3: Refugees</h1><ul>
+<li><p>Lots of Hmong died on the river.</p>
+</li>
+<li><p>In Thailand, they registered as refugees at UN.</p>
+</li>
+<li><p>They were treated badly by Thailand soldier, since they did not have a home.</p>
+</li>
+<li><p>They lived in a bad place, So Kow Toe. Then they were carried to Ban Vinai Refugee Camp.</p>
+</li>
+</ul>
+<h1 id="Chapter-4-Ban-Vinai-Refugee-Camp"><a href="#Chapter-4-Ban-Vinai-Refugee-Camp" class="headerlink" title="Chapter 4: Ban Vinai Refugee Camp"></a>Chapter 4: Ban Vinai Refugee Camp</h1><ul>
+<li><p>Yang born.<br>Mai Kao</p>
+</li>
+<li><p>The two children took a hard way to grow up.</p>
+</li>
+<li><p>Life is tough.</p>
+</li>
+<li><p>They realized the camp was not home. 27%</p>
+</li>
+</ul>
+<p>The adults and the older children who understood the context of our stay knew that Ban Vinai Refugee Camp was not home and so they could not settle into it like a home. There were Thai men in uniforms with guns that surrounded us. Hmong men and women were beaten, raped, and killed when they ventured too far from the safety of their families and friends. People stayed close together because they were scared. A child could not even trust food or water. I could only drink rainwater from the clay barrels after my mother, my father, my grandmother, or another person I knew had boiled it. Being sick was a horrible way to live because it meant that death was close by. There was the clinic, with its gray cement walls and bathrooms in a line, but more dead people came out of that door than any other build</p>
+<ul>
+<li>Until 6, the camp was still Yang’s home. 28%</li>
+</ul>
+<p>“My grandmother was the only other person who shared fond memories of the camp with me. For us, in many ways, the life we had in the camp was ideal. We were surrounded by people who loved us.”</p>
+<p>“Grandma enjoyed the time in Thailand. Her sons were poor because there was no way for them to work. But she did not mind their poverty because her family was together and alive. The war was in the past, and for her that was enough to make the future a busy one, filled with living. Grandma’s little stand was financed through the generosity of her two daughters, both of whom had escaped from Laos with their husbands much earlier than my family had. One had gone to California and the other to France. My family knew that if a family really wanted to, they could go and register to get out of Ban Vinai Refugee camp and go to new countries like France, Australia, and America. But she refused to let any of her sons register to get out of the camp. She said that she was old and that she wanted to see them together for as long as she could.”</p>
+<ul>
+<li>Grandma knew medical things</li>
+<li>A story of Yer</li>
+</ul>
+<p>“ Not very many things could get to us in Ban Vinai Refugee Camp. Maybe this is why in my memories of the camp, it is just dust and flip-flops for people with rough feet and plastic boots for people with newer feet like my own. It is people I love living around me. The world of our lives then was contained in a way that life would never be again.”</p>
+<p>#Chapter 5: The Second Leaving #</p>
+<ul>
+<li>32% - patriarchal practices!</li>
+</ul>
+<p>“Mother, there is no life here for me or anyone else. The Thai people do not want us here. Mother, we have no country to go back to. Mother, you gave birth to me. You wanted to give me a chance at life. That life was ruined by the war. Now I have two girls. What would happen to me in America is not as important as what would happen to my girls here. You love me. I love my daughters as you love me, Mother.”</p>
+<ul>
+<li>Father seeking sons, also wives.</li>
+</ul>
+<h1 id="Chapter-6-Phanat-Nikhom-Transition-Camp-to-America"><a href="#Chapter-6-Phanat-Nikhom-Transition-Camp-to-America" class="headerlink" title="Chapter 6: Phanat Nikhom Transition Camp to America"></a>Chapter 6: Phanat Nikhom Transition Camp to America</h1><p>People learned American languages and style here. Grandma and I stayed in a weired type.</p>
+<p>One woman died. </p>
+<p>Grandma and uncle to CA, our family to MI.</p>
+<h1 id="Chapter-7-A-return-to-the-cloud"><a href="#Chapter-7-A-return-to-the-cloud" class="headerlink" title="Chapter 7: A return to the cloud"></a>Chapter 7: A return to the cloud</h1><p>Arrive at America.<br>Description about the journey.</p>
+<h1 id="Chapter-8-Before-the-babies"><a href="#Chapter-8-Before-the-babies" class="headerlink" title="Chapter 8: Before the babies"></a>Chapter 8: Before the babies</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://cosmos218.github.io/2018/11/23/Kd-Trees/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -729,7 +1125,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -751,7 +1147,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
